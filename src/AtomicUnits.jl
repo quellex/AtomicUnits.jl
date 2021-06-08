@@ -24,4 +24,5 @@ au2eV(ene_au) = fac_au2eV/ene_au
 eV2au(ene_eV) = fac_au2eV/ene_eV
 A2i(A, wlen) = e2i(A*wlen2au(wlen))
 i2A(fint, wlen) = i2e(fint)/wlen2au(wlen)
+end
 #
