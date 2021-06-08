@@ -3,6 +3,7 @@
 module AtomicUnits
 export fac_i2e, fac_vnm2au, fac_wlenev, fac_au2eV
 export i2e, e2i, vnm2au, au2vnm, au2as, as2au, wlen2au, au2wlen, wlen2eV, eV2wlen, eV2au, au2eV
+export A2i, i2A
 const fac_i2e  = 3.50944506e16   # intensity [W/cm^2] → amplitude [a.u.]
 const fac_vnm2au = 514.2	# amplitude [V/nm] → amplitude [a.u.]
 const fac_au2as  = 24.1899	# time [a.u.] → time[atto sec.]
@@ -21,4 +22,6 @@ wlen2eV(wlen_nm) = fac_wleneV / wlen_nm
 eV2wlen(ene_eV) = fac_wleneV / ene_eV
 au2eV(ene_au) = fac_au2eV/ene_au
 eV2au(ene_eV) = fac_au2eV/ene_eV
-end
+A2i(A, wlen) = e2i(A*wlen2au(wlen))
+i2A(fint, wlen) = i2e(fint)/wlen2au(wlen)
+#
