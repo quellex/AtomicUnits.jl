@@ -1,7 +1,7 @@
 name = "AtomicUnits"
 uuid = "490ed623-4b6c-45fe-a125-b26518be62f4"
 authors = ["Takuma Teramura <=> and contributors"]
-version = "0.1.1"
+version = "0.1.2"
 
 [compat]
 julia = "1"
