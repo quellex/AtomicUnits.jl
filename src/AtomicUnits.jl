@@ -1,6 +1,7 @@
 # --------10--------20--------30--------40--------50--------60--------70--------80--------90--------100-------110-------120--------130
 # unit conversion
 module AtomicUnits
+using PhysicalConstants
 export fac_i2e, fac_vnm2e, fac_wlenev, fac_au2eV
 export i2e, e2i, vnm2e, e2vnm, i2vnm, vnm2i
 export au2as, as2au, wlen2au, au2wlen, wlen2eV, eV2wlen, eV2au, au2eV
@@ -38,6 +39,10 @@ vnm2e(famp_vnm) = famp_vnm / fac_vnm2e
 e2vnm(famp_au) = famp_au * fac_vnm2e
 vnm2i(famp_vnm) = e2i(vnm2e(famp_vnm))
 i2vnm(fint) = e2vnm(i2e(fint))
+"""
+Ponderomotive energy (intensity [W/cm²], wavelength [nm]) → Up [a.u.]
+"""
+Up(fint, wlen_nm) = i2e(fint)^2/(4*wlen2au(wlen_nm)^2)
 """
 convert (vector potential [a.u.], wavelength [nm]) → intensity [W/cm²]
 """
