@@ -60,5 +60,5 @@ au2wlen(freq_au) = fac_au2eV * freq_au
 wlen2eV(wlen_nm) = fac_wleneV / wlen_nm
 eV2wlen(ene_eV) = fac_wleneV / ene_eV
 au2eV(ene_au) = fac_au2eV * ene_au
-eV2au(ene_eV) = fac_au2eV / ene_eV
+eV2au(ene_eV) = ene_eV / fac_au2eV
 end
