@@ -6,6 +6,7 @@ export fac_i2e, fac_vnm2e, fac_wlenev, fac_au2eV
 export i2e, e2i, vnm2e, e2vnm, i2vnm, vnm2i
 export au2as, as2au, wlen2au, au2wlen, wlen2eV, eV2wlen, eV2au, au2eV
 export A2i, i2A
+export Up
 """
 fac_i2e = 3.50944506e16
 convert factor: intensity [W/cm²] ↔ electric field [a.u.]
@@ -65,6 +66,6 @@ au2wlen(freq_au) = fac_au2eV * freq_au
 wlen2eV(wlen_nm) = fac_wleneV / wlen_nm
 eV2wlen(ene_eV) = fac_wleneV / ene_eV
 au2eV(ene_au) = fac_au2eV * ene_au
-eV2au(ene_eV) = fac_au2eV / ene_eV
+eV2au(ene_eV) = ene_eV / fac_au2eV
 wlen2period(wlen_nm) = au2as(2π / wlen2au(wlen_nm))
 end
