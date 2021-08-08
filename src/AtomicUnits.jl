@@ -8,27 +8,32 @@ export au2as, as2au, wlen2au, au2wlen, wlen2eV, eV2wlen, eV2au, au2eV
 export A2i, i2A
 """
 fac_i2e = 3.50944506e16
-convert factor: intensity [W/cm²] → electric field [a.u.]
+convert factor: intensity [W/cm²] ↔ electric field [a.u.]
+1 W/cm² = 3.50944506e16 (1 a.u.)²
 """
 const fac_i2e = 3.50944506e16   # intensity [W/cm^2] → amplitude [a.u.]
 """
 fac_vnm2e = 514.221
-convert factor: electric field [V/nm] → electric field [a.u.]
+convert factor: electric field [V/nm] ↔ electric field [a.u.]
+1 a.u. = 514.221 V/nm
 """
 const fac_vnm2e = 514.221# amplitude [V/nm] → amplitude [a.u.]
 """
 fac_au2as = 24.1899
-convert factor: time [a.u.] → time [atto. sec]
+convert factor: time [a.u.] ↔ time [atto. sec]
+1 a.u. = 24.1899 as
 """
 const fac_au2as = 24.1899# time [a.u.] → time[atto sec.]
 """
 fac_wleneV = 1239.84190
-convert factor: wavelength [nm] → photon energy [eV]
+convert factor: wavelength [nm] ↔ photon energy [eV]
+1 nm * 1 eV = 1239.84190 nm*eV
 """
 const fac_wleneV = 1239.84190   # wlen [n.m.] * energy [eV]
 """
 fac_au2eV = 27.2113845
-convert factor: photon energy [a.u.] → photon energy [eV]
+convert factor: photon energy [a.u.] ↔ photon energy [eV]
+1 a.u. = 27.2113845 eV
 """
 const fac_au2eV = 27.2113845# energy [a.u.] → energy [eV]
 ## convert functions
@@ -42,7 +47,7 @@ i2vnm(fint) = e2vnm(i2e(fint))
 """
 Ponderomotive energy (intensity [W/cm²], wavelength [nm]) → Up [a.u.]
 """
-Up(fint, wlen_nm) = i2e(fint)^2/(4*wlen2au(wlen_nm)^2)
+Up(fint, wlen_nm) = i2e(fint)^2 / (4 * wlen2au(wlen_nm)^2)
 """
 convert (vector potential [a.u.], wavelength [nm]) → intensity [W/cm²]
 """
@@ -61,4 +66,5 @@ wlen2eV(wlen_nm) = fac_wleneV / wlen_nm
 eV2wlen(ene_eV) = fac_wleneV / ene_eV
 au2eV(ene_au) = fac_au2eV * ene_au
 eV2au(ene_eV) = fac_au2eV / ene_eV
+wlen2period(wlen_nm) = au2as(2π / wlen2au(wlen_nm))
 end
