@@ -50,7 +50,7 @@ fac_eV2J = 1.602176634e-19
 convert factor: photon energy [eV] ↔ photon energy [J]
 1 eV = 1.602176634e-19 J
 """
-const fac_au2eV = e.val
+const fac_eV2J = e.val
 ## convert functions
 # laser amplitude
 i2e(fint) = sqrt(fint / fac_i2e)
