@@ -2,6 +2,7 @@
 # unit conversion
 module AtomicUnits
 using PhysicalConstants
+import PhysicalConstants.CODATA2018: c_0, ε_0, μ_0, e
 export fac_i2e, fac_vnm2e, fac_wlenev, fac_au2eV
 export i2e, e2i, vnm2e, e2vnm, i2vnm, vnm2i
 export au2as, as2au, wlen2au, au2wlen, wlen2eV, eV2wlen, eV2au, au2eV
@@ -10,33 +11,45 @@ export Up
 """
 fac_i2e = 3.50944506e16
 convert factor: intensity [W/cm²] ↔ electric field [a.u.]
-1 W/cm² = 3.50944506e16 (1 a.u.)²
+1 a.u. = ε_0.val * c_0.val * fac_vm2e^2 / 2 / 1e4 = 3.50944506e16 W/cm²
 """
-const fac_i2e = 3.50944506e16   # intensity [W/cm^2] → amplitude [a.u.]
+const fac_i2e = ε_0.val * c_0.val * fac_vm2e^2 / 2 / 1e4
+"""
+fac_vm2e = 5.14221e11
+convert factor: electric field [V/nm] ↔ electric field [a.u.]
+1 a.u. = (e / (4π * ε_0 * a_0^2)) = 5.14221e11 V/m
+"""
+const fac_vm2e = (e / (4π * ε_0 * a_0^2)).val
 """
 fac_vnm2e = 514.221
 convert factor: electric field [V/nm] ↔ electric field [a.u.]
-1 a.u. = 514.221 V/nm
+1 a.u. = fac_vm2e / 1e9 = 514.221 V/nm
 """
-const fac_vnm2e = 514.221# amplitude [V/nm] → amplitude [a.u.]
+const fac_vnm2e = fac_vm2e / 1e9
 """
 fac_au2as = 24.1899
 convert factor: time [a.u.] ↔ time [atto. sec]
 1 a.u. = 24.1899 as
 """
-const fac_au2as = 24.1899# time [a.u.] → time[atto sec.]
+const fac_au2as = 24.1899
 """
 fac_wleneV = 1239.84190
 convert factor: wavelength [nm] ↔ photon energy [eV]
 1 nm * 1 eV = 1239.84190 nm*eV
 """
-const fac_wleneV = 1239.84190   # wlen [n.m.] * energy [eV]
+const fac_wleneV = 1239.84190
 """
-fac_au2eV = 27.2113845
+fac_au2eV = 27.211386245
 convert factor: photon energy [a.u.] ↔ photon energy [eV]
-1 a.u. = 27.2113845 eV
+1 a.u. = (e^2/(4π*ε0*a0))/e = 27.211386245 eV
 """
-const fac_au2eV = 27.2113845# energy [a.u.] → energy [eV]
+const fac_au2eV = ((e^2 / (4π * ε_0 * a_0)) / e).val
+"""
+fac_eV2J = 1.602176634e-19
+convert factor: photon energy [eV] ↔ photon energy [J]
+1 eV = 1.602176634e-19 J
+"""
+const fac_au2eV = e.val
 ## convert functions
 # laser amplitude
 i2e(fint) = sqrt(fint / fac_i2e)
@@ -67,5 +80,16 @@ wlen2eV(wlen_nm) = fac_wleneV / wlen_nm
 eV2wlen(ene_eV) = fac_wleneV / ene_eV
 au2eV(ene_au) = fac_au2eV * ene_au
 eV2au(ene_eV) = ene_eV / fac_au2eV
+"""
+convert wavelength [nm] → period [as]
+"""
 wlen2period(wlen_nm) = au2as(2π / wlen2au(wlen_nm))
+"""
+convert energy [eV] → energy [J]
+"""
+eV2J(ene_eV) = fac_eV2J * ene_eV
+"""
+convert energy [J] → energy [eV]
+"""
+J2eV(ene_J) = ene_J / fac_eV2J
 end
