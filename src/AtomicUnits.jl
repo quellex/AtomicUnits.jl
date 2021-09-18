@@ -2,8 +2,8 @@
 # unit conversion
 module AtomicUnits
 using PhysicalConstants
-import PhysicalConstants.CODATA2018: c_0, ε_0, μ_0, e
-export fac_i2e, fac_vnm2e, fac_wlenev, fac_au2eV
+import PhysicalConstants.CODATA2018: c_0, ε_0, μ_0, e, a_0
+export fac_i2e, fac_vnm2e, fac_wlenev, fac_au2eV, fac_vm2e
 export i2e, e2i, vnm2e, e2vnm, i2vnm, vnm2i
 export au2as, as2au, wlen2au, au2wlen, wlen2eV, eV2wlen, eV2au, au2eV
 export A2i, i2A
