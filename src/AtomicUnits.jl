@@ -10,17 +10,17 @@ export A2i, i2A
 export Up
 export eV2J, J2eV
 """
-fac_i2e = 3.50944506e16
-convert factor: intensity [W/cm²] ↔ electric field [a.u.]
-1 a.u. = ε_0.val * c_0.val * fac_vm2e^2 / 2 / 1e4 = 3.50944506e16 W/cm²
-"""
-const fac_i2e = ε_0.val * c_0.val * fac_vm2e^2 / 2 / 1e4
-"""
 fac_vm2e = 5.14221e11
 convert factor: electric field [V/nm] ↔ electric field [a.u.]
 1 a.u. = (e / (4π * ε_0 * a_0^2)) = 5.14221e11 V/m
 """
 const fac_vm2e = (e / (4π * ε_0 * a_0^2)).val
+"""
+fac_i2e = 3.50944506e16
+convert factor: intensity [W/cm²] ↔ electric field [a.u.]
+1 a.u. = ε_0.val * c_0.val * fac_vm2e^2 / 2 / 1e4 = 3.50944506e16 W/cm²
+"""
+const fac_i2e = ε_0.val * c_0.val * fac_vm2e^2 / 2 / 1e4
 """
 fac_vnm2e = 514.221
 convert factor: electric field [V/nm] ↔ electric field [a.u.]
