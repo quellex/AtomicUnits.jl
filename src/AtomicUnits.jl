@@ -8,6 +8,7 @@ export i2e, e2i, vnm2e, e2vnm, i2vnm, vnm2i
 export au2as, as2au, wlen2au, au2wlen, wlen2eV, eV2wlen, eV2au, au2eV
 export A2i, i2A
 export Up
+export eV2J, J2eV
 """
 fac_i2e = 3.50944506e16
 convert factor: intensity [W/cm²] ↔ electric field [a.u.]
