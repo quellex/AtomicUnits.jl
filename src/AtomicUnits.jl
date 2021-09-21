@@ -1,15 +1,13 @@
 # --------10--------20--------30--------40--------50--------60--------70--------80--------90--------100-------110-------120--------130
-# unit conversion
 module AtomicUnits
 using PhysicalConstants
-import PhysicalConstants.CODATA2018: c_0, ε_0, μ_0, e, a_0, ħ, h
+import PhysicalConstants.CODATA2018: c_0, ε_0, μ_0, e, a_0, ħ, h, m_e
 export fac_i2e, fac_vnm2e, fac_wlenev, fac_au2eV, fac_vm2e
 export i2e, e2i, vnm2e, e2vnm, i2vnm, vnm2i
 export au2as, as2au, wlen2au, au2wlen, wlen2eV, eV2wlen, eV2au, au2eV
 export A2i, i2A
 export Up
 export au_mass, au_length, au_charge, au_action, au_energy
-# a.u. ↔ SI
 """
 mass (electron mass)
 1 a.u. = mₑ kg = 9.10938e-31 kg
