@@ -2,19 +2,45 @@
 # unit conversion
 module AtomicUnits
 using PhysicalConstants
-import PhysicalConstants.CODATA2018: c_0, ε_0, μ_0, e, a_0
+import PhysicalConstants.CODATA2018: c_0, ε_0, μ_0, e, a_0, ħ, h
 export fac_i2e, fac_vnm2e, fac_wlenev, fac_au2eV, fac_vm2e
 export i2e, e2i, vnm2e, e2vnm, i2vnm, vnm2i
 export au2as, as2au, wlen2au, au2wlen, wlen2eV, eV2wlen, eV2au, au2eV
 export A2i, i2A
 export Up
-export eV2J, J2eV
+export au_mass, au_length, au_charge, au_action, au_energy
+# a.u. ↔ SI
+"""
+mass (electron mass)
+1 a.u. = mₑ kg = 9.10938e-31 kg
+"""
+const au_mass = m_e.val
+"""
+length (Bohr radius)
+1 a.u. = a₀ m = 5.291772e-11 m
+"""
+const au_length = a_0.val
+"""
+charge (elementary charge)
+1 a.u. = e C = 1.602176634e-19 C (exact)
+"""
+const au_charge = e.val
+"""
+action (Dirac's constant)
+1 a.u. = ħ J⋅s = 1.054571817e-34 J⋅s (exact)
+"""
+const au_action = ħ.val
+"""
+energy (Hartree)
+1 a.u. = e²/(4πε₀a₀) J
+"""
+const au_energy = (e^2 / (4π * ε_0 * a_0)).val
 """
 fac_vm2e = 5.14221e11
 convert factor: electric field [V/nm] ↔ electric field [a.u.]
-1 a.u. = (e / (4π * ε_0 * a_0^2)) = 5.14221e11 V/m
+1 a.u. = Eh/ea₀ V/m = 5.14221e11 V/m
 """
-const fac_vm2e = (e / (4π * ε_0 * a_0^2)).val
+const fac_vm2e = au_energy / (au_charge * au_length)
 """
 fac_i2e = 3.50944506e16
 convert factor: intensity [W/cm²] ↔ electric field [a.u.]
@@ -30,27 +56,21 @@ const fac_vnm2e = fac_vm2e / 1e9
 """
 fac_au2as = 24.1899
 convert factor: time [a.u.] ↔ time [atto. sec]
-1 a.u. = 24.1899 as
+1 a.u. = ħ/Eh s = 24.1899 as
 """
-const fac_au2as = 24.1899
+const fac_au2as = (au_action / au_energy) * 1e18
 """
 fac_wleneV = 1239.84190
 convert factor: wavelength [nm] ↔ photon energy [eV]
-1 nm * 1 eV = 1239.84190 nm*eV
+1 nm * 1 eV = hc/e m⋅J = 1239.84190 nm⋅eV
 """
-const fac_wleneV = 1239.84190
+const fac_wleneV = (c_0 * h / e).val * 1e9
 """
 fac_au2eV = 27.211386245
 convert factor: photon energy [a.u.] ↔ photon energy [eV]
-1 a.u. = (e^2/(4π*ε0*a0))/e = 27.211386245 eV
+1 a.u. = Eh/e eV = 27.211386245 eV
 """
-const fac_au2eV = ((e^2 / (4π * ε_0 * a_0)) / e).val
-"""
-fac_eV2J = 1.602176634e-19
-convert factor: photon energy [eV] ↔ photon energy [J]
-1 eV = 1.602176634e-19 J
-"""
-const fac_eV2J = e.val
+const fac_au2eV = au_energy / au_charge
 ## convert functions
 # laser amplitude
 i2e(fint) = sqrt(fint / fac_i2e)
@@ -88,9 +108,9 @@ wlen2period(wlen_nm) = au2as(2π / wlen2au(wlen_nm))
 """
 convert energy [eV] → energy [J]
 """
-eV2J(ene_eV) = fac_eV2J * ene_eV
+eV2J(ene_eV) = au_charge * ene_eV
 """
 convert energy [J] → energy [eV]
 """
-J2eV(ene_J) = ene_J / fac_eV2J
+J2eV(ene_J) = ene_J / au_charge
 end
